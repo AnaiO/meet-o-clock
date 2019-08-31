@@ -1,3 +1,7 @@
+.homepage--main{
+    display: flex;
+    min-height: 100vh;
+}
 
 .homepage--left{
     background-color: black;
@@ -7,7 +11,6 @@
     
 }
 
-
 .homepage--left h1{
     font-family: 'Fredoka One', cursive;
     color: white;
@@ -15,18 +18,13 @@
     margin: 1rem;
 }
 
-
 .homepage--left span{
    font-family: 'Cookie', cursive; 
    color: white;
-   font-size: 1.5rem;
+   font-size: 1.5em;
 }
 
 
-.homepage--main{
-    display: flex;
-    min-height: 100vh;
-}
 
 .homepage--buttons{
     display:flex;
@@ -34,14 +32,14 @@
 }
 
 .homepage--button{
-    margin: 5%;
+    margin: 4rem;
     margin-right: 2rem;
     transition: all .2s ease-in-out;
 }
 
-.homepage--button:hover{
+/* .homepage--button:hover{
     transform: scale(1.5);
-}
+} */
 
 .homepage--right{
     padding: 5%;
@@ -55,7 +53,5 @@
     margin-bottom: 2em;
 }
 
-header img{
-    width: 100%;
-}
+
 
