@@ -1,8 +1,7 @@
+
 .homepage--left{
     background-color: black;
     text-align: center;
-    width: 50vw;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     
@@ -12,7 +11,7 @@
 .homepage--left h1{
     font-family: 'Fredoka One', cursive;
     color: white;
-    font-size: 5rem;
+    font-size: 5em;
     margin: 1rem;
 }
 
@@ -26,6 +25,7 @@
 
 .homepage--main{
     display: flex;
+    min-height: 100vh;
 }
 
 .homepage--buttons{
@@ -34,7 +34,7 @@
 }
 
 .homepage--button{
-    margin-top: 8rem;
+    margin: 5%;
     margin-right: 2rem;
     transition: all .2s ease-in-out;
 }
@@ -44,15 +44,18 @@
 }
 
 .homepage--right{
-    width: 50vw;
-    height: 100vh;
     padding: 5%;
     background-image: url('../img/carte.jpg');
+    background-repeat: no-repeat;
     
 }
 
 .homepage--title{
     font-family: 'Fredoka One', cursive;
-    margin-bottom: 2rem;
+    margin-bottom: 2em;
+}
+
+header img{
+    width: 100%;
 }
 
