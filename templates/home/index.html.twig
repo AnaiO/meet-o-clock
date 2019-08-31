@@ -1,12 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bienvenue sur Meet'O'clock ! {% endblock %}
+{% block title %}Bienvenue sur {{ parent() }} ! {% endblock %}
 
 {% block body %}
-    <div class="wallpaper">
-        <div class="form--layout">  FORMULAIRE  </div>
-    Image par <a href="https://pixabay.com/fr/users/StartupStockPhotos-690514/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=593341">StartupStockPhotos</a>
-     de <a href="https://pixabay.com/fr/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=593341">Pixabay</a>
-    </div> 
-
+<div class="homepage--main">
+    <header class="homepage--left">
+        <h1>MEET'O'CLOCK</h1>
+        <span>Le réseau social des full-remote pro</span>
+        <div><img src="{{ asset('img/paris.svg.png') }}" alt="ligne de métro de paris"></div>
+        <div class="homepage--buttons">
+            <button class="homepage--button btn btn-light">S'inscrire</button>
+            <button class="homepage--button btn btn-light">Se connecter</button>
+        </div>
+    </header> 
+    <div class="homepage--right">
+        <h2 class="homepage--title"> Rejoignez la communauté Meet'O'Clock</h2>
+        <div class="form-group"> 
+            {{ form_start(form)}} 
+            <div class="form-group"> {{ form_row(form.firstname) }}</div>
+            <div class="form-group"> {{ form_row(form.lastname) }}</div>
+            <div class="form-group"> {{ form_row(form.email) }}</div>
+            <div class="form-group"> {{ form_row(form.username) }}</div>
+            <div class="form-group"> {{ form_row(form.password) }}</div>
+            <button class="btn btn-dark homepage--button" type="submit">Envoyer</button>
+            {{ form_end(form)}}   
+        </div>
+    </div>
+</div>
 {% endblock %}

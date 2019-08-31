@@ -1,16 +1,58 @@
-.wallpaper{
-    background-image: url('../img/wallpaper-home.jpg');
-    height: 100vh;
-    width: 100vw;
+.homepage--left{
+    background-color: black;
     text-align: center;
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
 }
 
-.form--layout{
-    
-    margin: auto;
-    width: 60%;
-    height: 50%;
-    padding-top: 10%;
-    background-color: white;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+
+.homepage--left h1{
+    font-family: 'Fredoka One', cursive;
+    color: white;
+    font-size: 5rem;
+    margin: 1rem;
 }
+
+
+.homepage--left span{
+   font-family: 'Cookie', cursive; 
+   color: white;
+   font-size: 1.5rem;
+}
+
+
+.homepage--main{
+    display: flex;
+}
+
+.homepage--buttons{
+    display:flex;
+    justify-content: center;
+}
+
+.homepage--button{
+    margin-top: 8rem;
+    margin-right: 2rem;
+    transition: all .2s ease-in-out;
+}
+
+.homepage--button:hover{
+    transform: scale(1.5);
+}
+
+.homepage--right{
+    width: 50vw;
+    height: 100vh;
+    padding: 5%;
+    background-image: url('../img/carte.jpg');
+    
+}
+
+.homepage--title{
+    font-family: 'Fredoka One', cursive;
+    margin-bottom: 2rem;
+}
+
