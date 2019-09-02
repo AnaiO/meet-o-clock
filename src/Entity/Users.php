@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Users
 {
@@ -93,6 +94,24 @@ class Users
         $this->userEventParticipations = new ArrayCollection();
         $this->subscriptions = new ArrayCollection();
         $this->groups = new ArrayCollection();
+    }
+
+       /**
+     * @ORM\PrePersist
+     * 
+     */
+    public function setCreatedUpdatedAtValues()
+    {
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue()
+    {
+        $this->updatedAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -290,16 +309,16 @@ class Users
         return $this->groups;
     }
 
-    public function addGroup(Groups $group): self
+    public function addGroups(Groups $group): self
     {
-        if (!$this->groups->contains($group)) {
+        // if (!$this->groups->contains($group)) {
             $this->groups[] = $group;
-        }
+        // }
 
         return $this;
     }
 
-    public function removeGroup(Groups $group): self
+    public function removeGroups(Groups $group): self
     {
         if ($this->groups->contains($group)) {
             $this->groups->removeElement($group);

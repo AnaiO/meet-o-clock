@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserEventParticipationRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class UserEventParticipation
 {
@@ -32,6 +33,24 @@ class UserEventParticipation
      * @ORM\JoinColumn(nullable=false)
      */
     private $event;
+
+       /**
+     * @ORM\PrePersist
+     * 
+     */
+    public function setCreatedUpdatedAtValues()
+    {
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue()
+    {
+        $this->updatedAt = new \DateTime();
+    }
 
     public function getId(): ?int
     {

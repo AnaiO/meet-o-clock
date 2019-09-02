@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Event
 {
@@ -63,11 +64,40 @@ class Event
      */
     private $adress;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Groups", inversedBy="events")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $groups;
+
     public function __construct()
     {
         $this->userEventParticipations = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->categories = new ArrayCollection();
+    }
+
+       /**
+     * @ORM\PrePersist
+     * 
+     */
+    public function setCreatedUpdatedAtValues()
+    {
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue()
+    {
+        $this->updatedAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -207,10 +237,10 @@ class Event
 
     public function addCategory(Category $category): self
     {
-        if (!$this->categories->contains($category)) {
+        // if (!$this->categories->contains($category)) {
             $this->categories[] = $category;
-            $category->addEvent($this);
-        }
+        //     $category->addEvent($this);
+        // }
 
         return $this;
     }
@@ -233,6 +263,30 @@ class Event
     public function setAdress(?Adress $adress): self
     {
         $this->adress = $adress;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getGroups(): ?Groups
+    {
+        return $this->groups;
+    }
+
+    public function setGroups(?Groups $groups): self
+    {
+        $this->groups = $groups;
 
         return $this;
     }

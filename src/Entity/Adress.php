@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdressRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Adress
 {
@@ -55,6 +56,24 @@ class Adress
      * @ORM\Column(type="decimal", precision=8, scale=4, nullable=true)
      */
     private $latitude;
+
+    /**
+     * @ORM\PrePersist
+     * 
+     */
+    public function setCreatedUpdatedAtValues()
+    {
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue()
+    {
+        $this->updatedAt = new \DateTime();
+    }
 
     public function getId(): ?int
     {
