@@ -46,7 +46,7 @@ class AppFixtures extends Fixture
             
             "slug" => function() use ($generator) { return $generator->slug(); },
         ]);
-        $populator->addEntity(Event::class, 15, [
+        $populator->addEntity(Event::class, 10, [
             "name" => function() use ($generator) { return $generator->realText(15); },
             "description" => function() use ($generator) { return $generator->realText(150); },
             "date" => function() use ($generator) { return $generator->datetimeAD(); },
@@ -63,14 +63,15 @@ class AppFixtures extends Fixture
         $populator->addEntity(Comment::class, 40, [
             "content" => function() use ($generator) { return $generator->realText(); },
         ]);
-        $populator->addEntity(UserEventParticipation::class, 30, [
-            "has_accepted" => function() use ($generator) { return $generator->boolean(); },
-        ]);
+        
         
         $inserted = $populator->execute();
+
+
         //generated lists for event_category
         $events = $inserted['App\Entity\Event'];
         $categories = $inserted['App\Entity\Category'];
+
         foreach ($events as $event) {
             shuffle($categories);
             $event->addCategory($categories[0]);
@@ -78,15 +79,17 @@ class AppFixtures extends Fixture
             $event->addCategory($categories[2]);
             $manager->persist($event);
         }
+
+
         //custom alerts 
         $userss = $inserted['App\Entity\Users'];
         $alertNames = ['eventCreate', 'eventEdit', 'eventDelete', 'eventComment'];
+
         foreach ($alertNames as $alertName){
             $alert = new Alert();
             $alert->setName($alertName);
             $alert->setDescription('alert description in few words');
             $alerts[]= $alert;
-            
             $manager->persist($alert);
         }
         foreach ($userss as $user){
@@ -96,36 +99,45 @@ class AppFixtures extends Fixture
                 $subscription->setUsers($user);
                 $subscription->setAlert($alertToPut);
                 $subscription->setHasSubscribed(true);
-               
                 $manager->persist($subscription);
             }
             
         }
+
+
         //generated lists for groups_users
-        
         $groupss = $inserted['App\Entity\Groups'];
-        foreach ($userss as $user) {
-            shuffle($groupss);
-            
-            $user->addGroups($groupss[0]);
-            
-            $user->addGroups($groupss[1]);
-            $user->addGroups($groupss[2]);
-         
-            $manager->persist($user);
+
+        foreach ($groupss as $group) {
+            shuffle($userss);
+            $group->addUsers($userss[0]);
+            $userss[0]->addGroups($group);
+            $group->addUsers($userss[1]);
+            $userss[1]->addGroups($group);
+            $group->addUsers($userss[2]);
+            $userss[2]->addGroups($group);
+            $manager->persist($group);
+            $manager->persist($userss[0]);
+            $manager->persist($userss[1]);
+            $manager->persist($userss[2]);
+
         }
 
         //Each event is related to one Group
-        foreach ($events as $event){
-            shuffle($groupss);
+        $userss = $inserted['App\Entity\Users'];
+        $events = $inserted['App\Entity\Event'];
 
-            $event->setGroups($groupss[0]);
-            $event->setGroups($groupss[1]);
-            $event->setGroups($groupss[2]);
-            $manager->persist($event);
-        }
-        
-       
+        foreach ($events as $event) {
+            $eventGroup = $event->getGroups(); 
+            $usersOfGroup = $eventGroup->getUsers(); 
+            foreach ($usersOfGroup as $user){
+                $userEventParticipation = new UserEventParticipation();
+                $userEventParticipation->setEvent($event);
+                $userEventParticipation->setUsers($user);
+                $userEventParticipation->setHasAccepted(true);
+                $manager->persist($userEventParticipation);
+            }   
+        } 
         $manager->flush();
     }
 }

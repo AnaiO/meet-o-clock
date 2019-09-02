@@ -2,18 +2,28 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Users;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EventController extends AbstractController
 {
     /**
-     * @Route("/events", name="events")
+     * @Route("/events/{user}", name="events", methods={"GET"})
      */
-    public function show()
+    public function listByUser(Users $user)
     {
+        $groupsOfUser = $user->getGroups();
+
+        foreach ($groupsOfUser as $group){
+            $events = $group->getEvents();
+            foreach ($events as $event){
+                $eventsOfUser[] = $event;
+            }
+        }
+        // dd($eventsOfUser);
         return $this->render('event/index.html.twig', [
-            'controller_name' => 'EventController',
+            'eventsOfUser' => $eventsOfUser,
         ]);
     }
 }

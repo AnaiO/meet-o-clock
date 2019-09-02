@@ -152,17 +152,17 @@ class Groups
     /**
      * @return Collection|Users[]
      */
-    public function getUsers(): Collection
+    public function getUsers()
     {
         return $this->users;
     }
 
-    public function addUser(Users $user): self
+    public function addUsers(Users $user): self
     {
-        if (!$this->users->contains($user)) {
+        // if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->addGroup($this);
-        }
+        //     $user->addGroup($this);
+        // }
 
         return $this;
     }
