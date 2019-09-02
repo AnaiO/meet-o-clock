@@ -13,17 +13,15 @@ class EventController extends AbstractController
      */
     public function listByUser(Users $user)
     {
-        $groupsOfUser = $user->getGroups();
-
-        foreach ($groupsOfUser as $group){
-            $events = $group->getEvents();
-            foreach ($events as $event){
-                $eventsOfUser[] = $event;
-            }
+        $invitationToEvents = $user->getUserEventParticipations();
+ 
+        foreach ($invitationToEvents as $invitation){
+            $events[] = $invitation->getEvent();  
         }
-        // dd($eventsOfUser);
+        // dd($events);
+
         return $this->render('event/index.html.twig', [
-            'eventsOfUser' => $eventsOfUser,
+            'events' => $events,
         ]);
     }
 }
