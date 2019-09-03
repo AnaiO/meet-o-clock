@@ -2,6 +2,12 @@
 
 {% block title %}{{ parent() }} - Events{% endblock %}
 
+{% block header %}
+    {% include '_header/_main_nav.html.twig' %}
+{% endblock %}
+
+{% block title1 %} Les évènements {% endblock %}
+
 {% block content %}
 <ul>
     {% for event in events %}
