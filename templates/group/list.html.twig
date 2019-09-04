@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Groupes{% endblock %}
+
+{% block pageName %} Mes groupes {% endblock %}
+
+{% block content %}
+    <div class="content--cards">
+        {% for group in groups %}
+            <div class="card" style="width: 18rem;">
+                <img src="https://picsum.photos/200/30" class="card-img-top" alt="...">
+                <div class="card-body">
+                {{ group.name }}
+                {{ group.description }}
+                </div>
+            </div>
+        {% else %}
+            Vous n'avez pas encore de groupe, cherchez-en un ! 
+            <a href="#"><button>Chercher un groupe</button></a>
+        {% endfor %}
+    </div>
+{% endblock %}
