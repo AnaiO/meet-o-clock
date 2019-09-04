@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Mon évènement{% endblock %}
+
+{% block pageName %} Mon évènement {% endblock %}
+
+{% block content %}
+    <div class="form--group">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_row(form.adress) }}
+        <button class="submit">Enregistrer</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
