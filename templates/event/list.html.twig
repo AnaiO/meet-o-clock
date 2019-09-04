@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Events{% endblock %}
+
+{% block pageName %} Les évènements {% endblock %}
+
+{% block content %}
+    <div class="content--cards">
+        {% for event in events %}
+            <div class="card" style="width: 18rem;">
+                <img src="https://picsum.photos/200/30" class="card-img-top" alt="...">
+                <div class="card-body">
+                {{ event.name }}
+                {{ event.description }}
+                {{ event.date|date('d/m/Y') }}
+                </div>
+            </div>
+        {% else %}
+            IL n'y a pas d'évènements en cours actuellement. Créez-en un ! 
+            <a href="#"><button>Créer un évènement</button></a>
+        {% endfor %}
+    </div>
+{% endblock %}

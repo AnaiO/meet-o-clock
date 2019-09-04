@@ -1,17 +1,42 @@
 .main--header{
     display: flex;
     flex-direction: column;
-    background-color: black;
+    background-color: orange;
     width: 20%;
     min-height: 100vh;
+    font-family: 'Fredoka One', cursive;
+    color: white;
+    text-align: center;
+    margin: 0 3% 0% 3%;
+}
+
+.main--header a:hover{
+    color: yellow;;
+}
+
+.main--header a{
+    color: white;
+}
+
+.content--cards{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.main--content{
+    width: 100%;
+
 }
 
 main{
     display: flex;
+    
 }
 
-.main--h1{
-    justify-content: center;
+.main--content h1{
+    margin: 0 5% 5% 5%;
+    text-align: center;
 }
 
 .homepage--main{
@@ -67,6 +92,16 @@ main{
 .homepage--title{
     font-family: 'Fredoka One', cursive;
     margin-bottom: 2em;
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+}
+
+footer a{
+    margin: 5%;
+    
 }
 
 

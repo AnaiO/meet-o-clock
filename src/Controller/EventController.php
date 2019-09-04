@@ -20,7 +20,7 @@ class EventController extends AbstractController
         }
         // dd($events);
 
-        return $this->render('event/index.html.twig', [
+        return $this->render('event/list.html.twig', [
             'events' => $events,
         ]);
     }
