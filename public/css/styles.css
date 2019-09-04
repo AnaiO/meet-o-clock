@@ -104,5 +104,11 @@ footer a{
     
 }
 
+.form--group{
+    width: 50%;
+    text-align: center;
+    margin: auto;
+}
+
 
 
